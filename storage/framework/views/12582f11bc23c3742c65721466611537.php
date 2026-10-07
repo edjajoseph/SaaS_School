@@ -1,0 +1,308 @@
+
+
+<?php $__env->startSection('content'); ?>
+<style>
+hr.hr-gradient {
+    height: 2px;
+    border: none;
+    background: linear-gradient(to right, #4099ff, #2ed8b6);
+    opacity: 1 !important;
+}
+</style>
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white table-card-header d-flex justify-content-between align-items-center py-3">
+                    <h4 class="mb-0 text-primary font-weight-bold">
+                        <i class="feather icon-file-text mr-2"></i><?php echo e(__("BULLETINS DE PAIE DU PERSONNEL")); ?>
+
+                    </h4>
+                    
+                    <!-- Bouton Nouveau Bulletin via Modal Medium -->
+                    <a data-header-class="bg-primary text-white" data-toggle="modal" id="mediumButton" data-target="#mediumModal" data-attr="<?php echo e(route('school.accounting.payrolls.create', ['school_id' => $schoolId])); ?>" class="btn btn-primary btn-round waves-effect shadow-sm text-white" title="Générer un bulletin">
+                        <i class="ace-icon fa fa-plus mr-1"></i> Générer une Paie
+                    </a>
+                </div>
+                <hr class="hr-gradient">                   
+                
+                <div class="card-block">
+                    <?php echo $__env->make('School::alerts.success', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    <?php echo $__env->make('School::alerts.errors', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
+                    <!-- Notification SweetAlert Flash Session -->
+                    <?php if($message = session('success')): ?>
+                        <script>
+                            Swal.fire({ 
+                                icon: 'success', 
+                                title: 'Félicitations !', 
+                                text: <?php echo json_encode($message); ?>, 
+                                confirmButtonColor: '#1ab394' 
+                            });
+                        </script>
+                    <?php elseif($message = session('error')): ?>
+                        <script>
+                            Swal.fire({ 
+                                icon: 'error', 
+                                title: 'Désolé !', 
+                                text: <?php echo json_encode($message); ?>, 
+                                confirmButtonColor: '#ed5565' 
+                            });
+                        </script>
+                    <?php endif; ?>
+
+                    <!-- Formulaire de Filtres -->
+                    <form method="GET" action="<?php echo e(route('school.accounting.payrolls.index')); ?>" class="mb-4">
+                        <div class="row">
+                            <!-- Filtre Établissement -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label font-weight-bold text-dark">
+                                        <i class="fa fa-university text-primary mr-1"></i> <?php echo e(__("Établissement")); ?>
+
+                                    </label>
+                                    <select name="school_id" id="school_id" class="form-control form-control-alternative">
+                                        <option value="">-- Toutes les écoles --</option>
+                                        <?php $__currentLoopData = $schools; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $school): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($school->id); ?>" <?php echo e($schoolId == $school->id ? 'selected' : ''); ?>>
+                                                <?php echo e($school->name ?? $school->libelle); ?>
+
+                                            </option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Filtre Agent/Employé (Mis à jour dynamiquement) -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label font-weight-bold text-dark">
+                                        <i class="fa fa-user text-primary mr-1"></i> <?php echo e(__("Employé / Enseignant")); ?>
+
+                                    </label>
+                                    <select name="staff_id" id="staff_id" class="form-control form-control-alternative">
+                                        <option value="">-- Tous les employés de l'école --</option>
+                                        <?php $__currentLoopData = $teachers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teacher): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php
+                                                $nomComplet = trim(($teacher->personne->nom ?? '') . ' ' . ($teacher->personne->prenoms ?? ''));
+                                            ?>
+                                            <option value="<?php echo e($teacher->id); ?>" <?php echo e(request('staff_id') == $teacher->id ? 'selected' : ''); ?>>
+                                                <?php echo e(!empty($nomComplet) ? $nomComplet : ($teacher->personne->nom_complet ?? 'Employé N°' . $teacher->id)); ?>
+
+                                            </option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Filtre Date -->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-label font-weight-bold text-dark">
+                                        <i class="fa fa-calendar text-primary mr-1"></i> <?php echo e(__("Période après le")); ?>
+
+                                    </label>
+                                    <input type="date" name="period_start" class="form-control form-control-alternative" value="<?php echo e(request('period_start')); ?>">
+                                </div>
+                            </div>
+
+                            <!-- Bouton Soumettre -->
+                            <div class="col-md-2 d-flex align-items-end mb-3">
+                                <button type="submit" class="btn btn-primary btn-round waves-effect shadow-sm w-100">
+                                    <i class="fa fa-filter mr-1"></i> <?php echo e(__("Filtrer")); ?>
+
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Table des bulletins -->
+                    <div class="dt-responsive table-responsive">
+                        <table id="basic-btn" class="table table-striped table-bordered table-hover nowrap align-middle">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>N° Bulletin</th>
+                                    <th>Employé</th>
+                                    <th>Type Contrat</th>
+                                    <th>Période</th>
+                                    <th class="text-right">Brut Total</th>
+                                    <th class="text-right">Retenues</th>
+                                    <th class="text-right">Net à Payer</th>
+                                    <th width="1%" class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $__empty_1 = true; $__currentLoopData = $payrolls; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payroll): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <tr>
+                                        <td><span class="badge badge-primary px-2 py-1"><?php echo e($payroll->payroll_number); ?></span></td>
+                                        <td class="font-weight-bold text-dark">
+                                            <?php
+                                                $p = $payroll->staff->personne ?? null;
+                                                $nomPayroll = trim(($p->nom ?? '') . ' ' . ($p->prenom ?? ''));
+                                            ?>
+                                            <?php echo e(!empty($nomPayroll) ? $nomPayroll : ($p->nom_complet ?? 'N/A')); ?>
+
+                                        </td>
+                                        <td>
+                                            <?php if($payroll->contract && $payroll->contract->contract_type): ?>
+                                                <span class="badge badge-info px-2 py-1"><?php echo e($payroll->contract->contract_type); ?></span>
+                                            <?php else: ?>
+                                                <span class="badge badge-secondary px-2 py-1">N/A</span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo e(\Carbon\Carbon::parse($payroll->period_start)->format('d/m/Y')); ?> au <?php echo e(\Carbon\Carbon::parse($payroll->period_end)->format('d/m/Y')); ?></td>
+                                        <td class="text-right font-weight-bold"><?php echo e(number_format($payroll->gross_amount + $payroll->bonuses_amount, 0, ',', ' ')); ?> FCFA</td>
+                                        <td class="text-right text-danger font-weight-bold">- <?php echo e(number_format($payroll->penalties_amount, 0, ',', ' ')); ?> FCFA</td>
+                                        <td class="text-right text-success font-weight-bold"><?php echo e(number_format($payroll->net_amount, 0, ',', ' ')); ?> FCFA</td>
+                                        <td class="text-center align-middle">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <!-- Action Aperçu -->
+                                                <a data-toggle="modal" id="mediumButton1" data-target="#mediumModal1" data-attr="<?php echo e(route('school.accounting.payrolls.show', $payroll->id)); ?>" class="btn btn-warning btn-mini mr-1 text-white" title="Voir détails">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+
+                                                <!-- Action Télécharger PDF -->
+                                                <a href="<?php echo e(route('school.accounting.payrolls.pdf', $payroll->id)); ?>" class="btn btn-primary btn-mini mr-1" title="Télécharger PDF" target="_blank">
+                                                    <i class="fa fa-file-pdf-o"></i>
+                                                </a>
+
+                                                <!-- Action Supprimer -->
+                                                <form action="<?php echo e(route('school.accounting.payrolls.destroy', $payroll->id)); ?>" method="POST" class="d-inline" 
+                                                    onsubmit="event.preventDefault(); Swal.fire({
+                                                        title: 'Êtes-vous sûr ?',
+                                                        text: 'Cette action supprimera définitivement cette fiche de paie !',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#ed5565',
+                                                        cancelButtonColor: '#1ab394',
+                                                        confirmButtonText: 'Oui, supprimer !',
+                                                        cancelButtonText: 'Annuler'
+                                                    }).then((result) => { if (result.isConfirmed) this.submit(); });">
+                                                    
+                                                    <?php echo csrf_field(); ?>
+                                                    <?php echo method_field('DELETE'); ?>
+                                                    
+                                                    <button type="submit" class="btn btn-danger btn-mini" title="Supprimer">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <tr>
+                                        <td colspan="8" class="text-center text-muted py-4">
+                                            <i class="fa fa-info-circle fa-2x d-block mb-2 text-secondary"></i>
+                                            Aucun bulletin de paie généré pour cet établissement.
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <?php echo e($payrolls->appends(request()->query())->links()); ?>
+
+                    </div>
+                </div>
+            </div>                                                
+        </div>
+    </div>
+</div>
+
+<!-- Modals dynamiques AJAX -->
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"><i class="fa fa-calculator mr-1"></i> GÉNÉRER UN BULLETIN DE PAIE</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="mediumBody">
+                <div class="text-center p-3">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i> Chargement en cours...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mediumModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header panel-primary">
+                <h5 class="modal-title text-info"><i class="fa fa-file-text-o mr-1"></i> DÉTAILS DU BULLETIN</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="mediumBody1">
+                <div class="text-center p-3">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i> Chargement en cours...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const schoolSelect = document.getElementById('school_id');
+    const staffSelect = document.getElementById('staff_id');
+
+    if (schoolSelect && staffSelect) {
+        schoolSelect.addEventListener('change', function () {
+            const schoolId = this.value;
+
+            // Vider le menu déroulant du personnel
+            staffSelect.innerHTML = '<option value="">Chargement des agents...</option>';
+            staffSelect.disabled = true;
+
+            if (!schoolId) {
+                staffSelect.innerHTML = '<option value="">-- Tous les employés de l'école --</option>';
+                staffSelect.disabled = false;
+                return;
+            }
+
+            // Requête Fetch pour récupérer les agents de l'école sélectionnée
+            fetch(`/school/accounting/payrolls/staff-by-school/${schoolId}`)
+                .then(response => response.json())
+                .then(data => {
+                    staffSelect.innerHTML = '<option value="">-- Tous les employés de l'école --</option>';
+
+                    if (data.length > 0) {
+                        data.forEach(staff => {
+                            const option = document.createElement('option');
+                            option.value = staff.id;
+                            option.textContent = staff.name;
+                            staffSelect.appendChild(option);
+                        });
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'Aucun agent sous contrat dans cet établissement';
+                        staffSelect.appendChild(option);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des agents:', error);
+                    staffSelect.innerHTML = '<option value="">Erreur de chargement</option>';
+                })
+                .finally(() => {
+                    staffSelect.disabled = false;
+                });
+        });
+    }
+});
+</script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('School::layouts.app3', [
+    'namePage' => 'Gestion des Bulletins de Paie',
+    'class' => 'login-page sidebar-mini',
+    'activePage' => 'payroll.index',
+    'activeModule' => 'paye',
+], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon3\www\saas-hotel\app\Modules\School/Views/payroll/index.blade.php ENDPATH**/ ?>

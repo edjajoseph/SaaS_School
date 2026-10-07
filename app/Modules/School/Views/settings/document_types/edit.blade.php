@@ -1,0 +1,63 @@
+<form method="POST" action="{{ route('settings.rh.document_types.update', $documentType->id) }}" autocomplete="off">
+    @csrf
+    @method('PUT')
+
+    <div class="modal-body p-4">
+        <div class="row">
+            <!-- Code -->
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label class="form-label font-weight-bold text-dark">
+                        <i class="fa fa-barcode text-success mr-1"></i> {{ __("Code / Sigle") }} <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" name="code" class="form-control form-control-alternative @error('code') is-invalid @enderror" value="{{ old('code', $documentType->code) }}" placeholder="Ex: EAN" style="text-transform: uppercase;" required>
+                    @error('code')<span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>@enderror
+                </div>
+            </div>
+
+            <!-- Nom -->
+            <div class="col-md-8">
+                <div class="form-group mb-3">
+                    <label class="form-label font-weight-bold text-dark">
+                        <i class="fa fa-file-text text-success mr-1"></i> {{ __("Nom du document") }} <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" name="name" class="form-control form-control-alternative @error('name') is-invalid @enderror" value="{{ old('name', $documentType->name) }}" required>
+                    @error('name')<span class="invalid-feedback d-block"><strong>{{ $message }}</strong></span>@enderror
+                </div>
+            </div>
+
+            <!-- Document Obligatoire -->
+            <div class="col-md-12 mt-2">
+                <div class="checkbox-fade fade-in-primary">
+                    <label for="is_required_create" class="font-weight-bold text-dark">
+                        <input type="checkbox" name="is_required" id="is_required_create" value="1" {{ old('is_required', $documentType->is_required) ? 'checked' : '' }}>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                        <span>{{ __("Document obligatoire pour l'inscription / le dossier") }}</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Statut Actif -->
+            <div class="col-md-12 mt-2">
+                <div class="checkbox-fade fade-in-primary">
+                    <label for="is_active_create" class="font-weight-bold text-dark">
+                        <input type="checkbox" name="is_active" id="is_active_create" value="1" {{ old('is_active', $documentType->is_active) ? 'checked' : '' }}>
+                        <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                        <span>{{ __("Rendre ce type de document immédiatement actif") }}</span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <div class="modal-footer bg-light d-flex justify-content-between align-items-center">
+        <a href="{{ route('settings.rh.document_types.index') }}" class="btn btn-secondary btn-round waves-effect">
+            <i class="fa fa-times mr-1"></i> {{ __('Fermer') }}
+        </a>
+        <button type="submit" class="btn btn-success btn-round waves-effect shadow-sm">
+            <i class="fa fa-sync-alt mr-1"></i> {{ __('Mettre à jour') }}
+        </button>
+    </div>
+</form>
