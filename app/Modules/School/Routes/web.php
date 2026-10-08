@@ -604,7 +604,7 @@ Route::middleware('auth')->group(function () {
         // PDF Exports
         Route::get('/pdf/receipt/{payment}', [FinancialReportController::class, 'exportPaymentReceiptPdf'])->name('pdf.receipt');
         Route::get('/pdf/student-account/{account}', [FinancialReportController::class, 'exportStudentAccountPdf'])->name('pdf.student-account');
-        Route::get('/pdf/daily-cash-pv', [FinancialReportController::class, 'exportDailyCashPvPdf'])->name('pdf.daily-cash-pv');
+        //Route::get('/pdf/daily-cash-pv', [FinancialReportController::class, 'exportDailyCashPvPdf'])->name('pdf.daily-cash-pv');
     
         // Excel Exports
         Route::get('/excel/overdue', [FinancialReportController::class, 'exportOverdueExcel'])->name('excel.overdue');

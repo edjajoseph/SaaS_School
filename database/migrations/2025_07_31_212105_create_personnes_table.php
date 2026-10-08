@@ -30,10 +30,7 @@ return new class extends Migration
                   ->nullable()
                   ->after('id')
                   ->constrained('personnes')
-                  ->nullOnDelete();
-
-            $table->boolean('pwd_change')->default(false)->after('password');
-            $table->boolean('isactive')->default(true)->after('pwd_change');
+                  ->nullOnDelete();            
         });
     }
 
