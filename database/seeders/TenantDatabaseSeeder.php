@@ -15,6 +15,7 @@ use App\Modules\School\Database\Seeders\StaffRoleSeeder;
 use App\Modules\School\Database\Seeders\SubjectSeeder;
 use App\Modules\School\Database\Seeders\AccountingJournalSeeder;
 use App\Modules\School\Database\Seeders\ChartOfAccountsSeeder;
+use App\Modules\School\Database\Seeders\DocumentTypeSeeder;
 
 class TenantDatabaseSeeder extends Seeder
 {

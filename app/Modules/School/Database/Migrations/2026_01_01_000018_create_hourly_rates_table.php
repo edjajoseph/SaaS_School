@@ -31,13 +31,29 @@ return new class extends Migration
         // 1. Attribution des cours, tarifs et volumes horaires
         Schema::create('teacher_subject_rates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
-            $table->foreignId('staff_id')->constrained('staff')->cascadeOnDelete();
-            $table->foreignId('school_class_id')->constrained('school_classes')->cascadeOnDelete();
-            $table->foreignId('school_subject_id')->constrained('school_subjects')->cascadeOnDelete();
-            $table->foreignId('academic_period_id')->nullable()->constrained('academic_periods')->nullOnDelete();
 
-            // Volumes horaires prévus (Heures)
+            $table->foreignId('school_id')
+                ->constrained('schools')
+                ->cascadeOnDelete();
+
+            $table->foreignId('staff_id')
+                ->constrained('staff')
+                ->cascadeOnDelete();
+
+            $table->foreignId('school_class_id')
+                ->constrained('school_classes')
+                ->cascadeOnDelete();
+
+            $table->foreignId('school_subject_id')
+                ->constrained('school_subjects')
+                ->cascadeOnDelete();
+
+            $table->foreignId('academic_period_id')
+                ->nullable()
+                ->constrained('academic_periods')
+                ->nullOnDelete();
+
+            // Volumes horaires prévus
             $table->integer('volume_cm')->default(0);
             $table->integer('volume_td')->default(0);
             $table->integer('volume_tp')->default(0);
@@ -49,26 +65,30 @@ return new class extends Migration
             $table->decimal('rate_tp', 10, 2)->default(0.00);
             $table->decimal('rate_examen', 10, 2)->default(0.00);
 
-            // Volumes horaires exécutés par type d'enseignement
-            $table->decimal('executed_volume_cm', 8, 2)->default(0.00)->after('volume_examen');
-            $table->decimal('executed_volume_td', 8, 2)->default(0.00)->after('executed_volume_cm');
-            $table->decimal('executed_volume_tp', 8, 2)->default(0.00)->after('executed_volume_td');
-            $table->decimal('executed_volume_examen', 8, 2)->default(0.00)->after('executed_volume_tp');
+            // Volumes horaires exécutés
+            $table->decimal('executed_volume_cm', 8, 2)->default(0.00);
+            $table->decimal('executed_volume_td', 8, 2)->default(0.00);
+            $table->decimal('executed_volume_tp', 8, 2)->default(0.00);
+            $table->decimal('executed_volume_examen', 8, 2)->default(0.00);
 
             // Total cumulé exécuté
-            $table->decimal('total_executed_hours', 8, 2)->default(0.00)->after('executed_volume_examen');
+            $table->decimal('total_executed_hours', 8, 2)->default(0.00);
 
-            // Indicateur d'achèvement et date de fin effective
-            $table->boolean('is_completed')->default(false)->after('is_customized');
-            $table->timestamp('completed_at')->nullable()->after('is_completed');
-
+            // État d'exécution
             $table->boolean('is_customized')->default(false);
-            
+            $table->boolean('is_completed')->default(false);
+            $table->timestamp('completed_at')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 
             $table->unique(
-                ['staff_id', 'school_class_id', 'school_subject_id', 'academic_period_id'], 
+                [
+                    'staff_id',
+                    'school_class_id',
+                    'school_subject_id',
+                    'academic_period_id'
+                ],
                 'staff_course_unique'
             );
         });

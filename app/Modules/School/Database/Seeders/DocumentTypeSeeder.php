@@ -1,10 +1,9 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Modules\School\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Modules\School\Models\DocumentType; // Ajustez le namespace selon votre module
 
 class DocumentTypeSeeder extends Seeder
 {
