@@ -246,7 +246,7 @@
                                     <tbody>
                                         <tr>
                                             <td>HeadPhone</td>
-                                            <td><img src="assets/back/assets/images/widget/p1.jpg" alt="" class="img-20"></td>
+                                            <td><img src="{{ asset('central/back/assets/images/widget/p1.jpg') }}" alt="" class="img-20"></td>
                                             <td>
                                                 <div><label class="badge badge-light-warning">Pending</label></div>
                                             </td>
@@ -255,7 +255,7 @@
                                         </tr>
                                         <tr>
                                             <td>Iphone 6</td>
-                                            <td><img src="assets/back/assets/images/widget/p2.jpg" alt="" class="img-20"></td>
+                                            <td><img src="{{ asset('central/back/assets/images/widget/p2.jpg') }}" alt="" class="img-20"></td>
                                             <td>
                                                 <div><label class="badge badge-light-danger">Cancel</label></div>
                                             </td>
@@ -264,7 +264,7 @@
                                         </tr>
                                         <tr>
                                             <td>Jacket</td>
-                                            <td><img src="assets/back/assets/images/widget/p3.jpg" alt="" class="img-20"></td>
+                                            <td><img src="{{ asset('central/back/assets/images/widget/p3.jpg') }}" alt="" class="img-20"></td>
                                             <td>
                                                 <div><label class="badge badge-light-success">Success</label></div>
                                             </td>
@@ -273,7 +273,7 @@
                                         </tr>
                                         <tr>
                                             <td>Sofa</td>
-                                            <td><img src="assets/back/assets/images/widget/p4.jpg" alt="" class="img-20"></td>
+                                            <td><img src="{{ asset('central/back/assets/images/widget/p4.jpg') }}" alt="" class="img-20"></td>
                                             <td>
                                                 <div><label class="badge badge-light-danger">Cancel</label></div>
                                             </td>
@@ -282,7 +282,7 @@
                                         </tr>
                                         <tr>
                                             <td>Iphone 6</td>
-                                            <td><img src="assets/back/assets/images/widget/p2.jpg" alt="" class="img-20"></td>
+                                            <td><img src="{{ asset('central/back/assets/images/widget/p2.jpg') }}" alt="" class="img-20"></td>
                                             <td>
                                                 <div><label class="badge badge-light-success">Success</label></div>
                                             </td>
@@ -291,7 +291,7 @@
                                         </tr>
                                         <tr>
                                             <td>HeadPhone</td>
-                                            <td><img src="assets/back/assets/images/widget/p1.jpg" alt="" class="img-20"></td>
+                                            <td><img src="{{ asset('central/back/assets/images/widget/p1.jpg') }}" alt="" class="img-20"></td>
                                             <td>
                                                 <div><label class="badge badge-light-warning">Pending</label></div>
                                             </td>
@@ -300,7 +300,7 @@
                                         </tr>
                                         <tr>
                                             <td>Iphone 6</td>
-                                            <td><img src="assets/back/assets/images/widget/p2.jpg" alt="" class="img-20"></td>
+                                            <td><img src="{{ asset('central/back/assets/images/widget/p2.jpg') }}" alt="" class="img-20"></td>
                                             <td>
                                                 <div><label class="badge badge-light-danger">Cancel</label></div>
                                             </td>

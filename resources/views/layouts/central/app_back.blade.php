@@ -16,22 +16,19 @@
     <meta name="keywords" content="">
     <meta name="author" content="Codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="central/back/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('central/back/assets/images/favicon.ico') }}" type="image/x-icon">
 
     <!-- data tables css -->
-    <link rel="stylesheet" href="central/back/assets/css/plugins/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('central/back/assets/css/plugins/dataTables.bootstrap4.min.css') }}">
 
     <!-- select2 css -->
-    <link rel="stylesheet" href="central/back/assets/css/plugins/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('central/back/assets/css/plugins/select2.min.css') }}">
 
     <!-- vendor css -->
-    <link rel="stylesheet" href="central/back/assets/css/style.css">
-    
-    <!-- Sweetalert2 -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('central/back/assets/css/style.css') }}">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(function(){
@@ -96,8 +93,8 @@
 					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
 					<a href="#!" class="b-brand">
 						<!-- ========   change your logo hear   ============ -->
-						<img src="assets/back/assets/images/logo.png" alt="" class="logo">
-						<img src="assets/back/assets/images/logo-icon.png" alt="" class="logo-thumb">
+						<img src="{{ asset('central/back/assets/images/logo.png') }}" alt="" class="logo">
+						<img src="{{ asset('central/back/assets/images/logo-icon.png') }}" alt="" class="logo-thumb">
 					</a>
 					<a href="#!" class="mob-toggler">
 						<i class="feather icon-more-vertical"></i>
@@ -136,7 +133,7 @@
 										</li>
 										<li class="notification">
 											<div class="media">
-												<img class="img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+												<img class="img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image">
 												<div class="media-body">
 													<p><strong>John Doe</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>5 min</span></p>
 													<p>New ticket Added</p>
@@ -148,7 +145,7 @@
 										</li>
 										<li class="notification">
 											<div class="media">
-												<img class="img-radius" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+												<img class="img-radius" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image">
 												<div class="media-body">
 													<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>10 min</span></p>
 													<p>Prchace New Theme and make payment</p>
@@ -157,7 +154,7 @@
 										</li>
 										<li class="notification">
 											<div class="media">
-												<img class="img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+												<img class="img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image">
 												<div class="media-body">
 													<p><strong>Sara Soudein</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>12 min</span></p>
 													<p>currently login</p>
@@ -166,7 +163,7 @@
 										</li>
 										<li class="notification">
 											<div class="media">
-												<img class="img-radius" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+												<img class="img-radius" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image">
 												<div class="media-body">
 													<p><strong>Joseph William</strong><span class="n-time text-muted"><i class="icon feather icon-clock m-r-10"></i>30 min</span></p>
 													<p>Prchace New Theme and make payment</p>
@@ -188,11 +185,11 @@
 						<li>
 							<div class="dropdown drp-user">
 								<a href="#!" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="assets/back/assets/images/user/avatar-1.jpg" class="img-radius wid-40" alt="User-Profile-Image">
+                                    <img src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" class="img-radius wid-40" alt="User-Profile-Image">
                                 </a>
 								<div class="dropdown-menu dropdown-menu-right profile-notification">
 									<div class="pro-head">
-										<img src="assets/back/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+										<img src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" class="img-radius" alt="User-Profile-Image">
 										<span>{{ Auth::user()->name }}</span>
 										<a href="auth-signin.html" class="dud-logout" title="Logout">
 											<i class="feather icon-log-out"></i>
@@ -250,7 +247,7 @@
 					<div class="main-friend-cont scroll-div">
 						<div class="main-friend-list">
 							<div class="media userlist-box" data-id="1" data-status="online" data-username="Josephin Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image ">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image ">
 									<div class="live-status">3</div>
 								</a>
 								<div class="media-body">
@@ -258,7 +255,7 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="2" data-status="online" data-username="Lary Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image">
 									<div class="live-status">1</div>
 								</a>
 								<div class="media-body">
@@ -266,13 +263,13 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="3" data-status="online" data-username="Alice">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-3.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-3.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Alice<small class="d-block text-c-green">online</small></h6>
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="4" data-status="offline" data-username="Alia">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image">
 									<div class="live-status">1</div>
 								</a>
 								<div class="media-body">
@@ -280,13 +277,13 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="5" data-status="offline" data-username="Suzen">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-4.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-4.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Suzen<small class="d-block text-muted">15 min ago</small></h6>
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="1" data-status="online" data-username="Josephin Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image ">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image ">
 									<div class="live-status">3</div>
 								</a>
 								<div class="media-body">
@@ -294,7 +291,7 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="2" data-status="online" data-username="Lary Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image">
 									<div class="live-status">1</div>
 								</a>
 								<div class="media-body">
@@ -302,13 +299,13 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="3" data-status="online" data-username="Alice">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-3.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-3.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Alice<small class="d-block text-c-green">online</small></h6>
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="4" data-status="offline" data-username="Alia">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image">
 									<div class="live-status">1</div>
 								</a>
 								<div class="media-body">
@@ -316,13 +313,13 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="5" data-status="offline" data-username="Suzen">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-4.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-4.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Suzen<small class="d-block text-muted">15 min ago</small></h6>
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="1" data-status="online" data-username="Josephin Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image ">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image ">
 									<div class="live-status">3</div>
 								</a>
 								<div class="media-body">
@@ -330,7 +327,7 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="2" data-status="online" data-username="Lary Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image">
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image">
 									<div class="live-status">1</div>
 								</a>
 								<div class="media-body">
@@ -338,7 +335,7 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="3" data-status="online" data-username="Alice">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-3.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-3.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Alice<small class="d-block text-c-green">online</small></h6>
 								</div>
@@ -368,19 +365,19 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="1" data-status="online" data-username="Josephin Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image "></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image "></a>
 								<div class="media-body">
 									<p class="chat-header">Josephin Doe<small class="d-block">i am not what happened . .</small></p>
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="2" data-status="online" data-username="Lary Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Lary Doe<small class="d-block">Avalable</small></h6>
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="3" data-status="online" data-username="Alice">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-3.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-3.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Alice<small class="d-block">hear using Elite able</small></h6>
 								</div>
@@ -394,7 +391,7 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="5" data-status="offline" data-username="Suzen">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-4.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-4.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Suzen<small class="d-block text-muted">Avalable</small></h6>
 								</div>
@@ -408,7 +405,7 @@
 								</div>
 							</div>
 							<div class="media userlist-box" data-id="2" data-status="online" data-username="Lary Doe">
-								<a class="media-left" href="#!"><img class="media-object img-radius" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image"></a>
+								<a class="media-left" href="#!"><img class="media-object img-radius" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image"></a>
 								<div class="media-body">
 									<h6 class="chat-header">Lary Doe<small class="d-block text-muted">not send free msg</small></h6>
 								</div>
@@ -479,7 +476,7 @@
 			<div class="main-chat-cont scroll-div">
 				<div class="main-friend-chat">
 					<div class="media chat-messages">
-						<a class="media-left photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image"></a>
+						<a class="media-left photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image"></a>
 						<div class="media-body chat-menu-content">
 							<div class="">
 								<p class="chat-cont">hello tell me something</p>
@@ -495,10 +492,10 @@
 							</div>
 							<p class="chat-time">8:22 a.m.</p>
 						</div>
-						<a class="media-right photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="assets/back/assets/images/user/avatar-1.jpg" alt="Generic placeholder image"></a>
+						<a class="media-right photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="{{ asset('central/back/assets/images/user/avatar-1.jpg') }}" alt="Generic placeholder image"></a>
 					</div>
 					<div class="media chat-messages">
-						<a class="media-left photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="assets/back/assets/images/user/avatar-2.jpg" alt="Generic placeholder image"></a>
+						<a class="media-left photo-table" href="#!"><img class="media-object img-radius img-radius m-t-5" src="{{ asset('central/back/assets/images/user/avatar-2.jpg') }}" alt="Generic placeholder image"></a>
 						<div class="media-body chat-menu-content">
 							<div class="">
 								<p class="chat-cont">can you help me?</p>
@@ -524,77 +521,34 @@
 	</section>
 	<!-- [ chat message ] end -->
 
-<!-- [ Main Content ] start -->
-    @yield('content')
-<!-- [ Main Content ] end -->
-    <!-- Warning Section start -->
-    <!-- Older IE warning message -->
-    <!--[if lt IE 11]>
-        <div class="ie-warning">
-            <h1>Warning!!</h1>
-            <p>You are using an outdated version of Internet Explorer, please upgrade
-               <br/>to any of the following web browsers to access this website.
-            </p>
-            <div class="iew-container">
-                <ul class="iew-download">
-                    <li>
-                        <a href="http://www.google.com/chrome/">
-                            <img src="assets/back/assets/images/browser/chrome.png" alt="Chrome">
-                            <div>Chrome</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.mozilla.org/en-US/firefox/new/">
-                            <img src="assets/back/assets/images/browser/firefox.png" alt="Firefox">
-                            <div>Firefox</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.opera.com">
-                            <img src="assets/back/assets/images/browser/opera.png" alt="Opera">
-                            <div>Opera</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.apple.com/safari/">
-                            <img src="assets/back/assets/images/browser/safari.png" alt="Safari">
-                            <div>Safari</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                            <img src="assets/back/assets/images/browser/ie.png" alt="">
-                            <div>IE (11 & above)</div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <p>Sorry for the inconvenience!</p>
-        </div>
-    <![endif]-->
-    <!-- Warning Section Ends -->
-
+    <!-- [ Main Content ] start -->
+        @yield('content')
+    <!-- [ Main Content ] end -->
+    
     <!-- Required Js -->
-    <script src="central/back/assets/js/vendor-all.min.js"></script>
-    <script src="central/back/assets/js/plugins/bootstrap.min.js"></script>
-    <script src="central/back/assets/js/pcoded.min.js"></script>
-	<script src="central/back/assets/js/menu-setting.min.js"></script>
+    <script src="{{ asset('central/back/assets/js/vendor-all.min.js') }}"></script>
+    <script src="{{ asset('central/back/assets/js/plugins/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('central/back/assets/js/pcoded.min.js') }}"></script>
+    <script src="{{ asset('central/back/assets/js/menu-setting.min.js') }}"></script>
 
-<!-- Apex Chart -->
-<script src="central/back/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- Apex Chart -->
+    <script src="{{ asset('central/back/assets/js/plugins/apexcharts.min.js') }}"></script>
 
-<!-- custom-chart js -->
-<script src="central/back/assets/js/pages/dashboard-sale.js"></script>
+    <!-- custom-chart js -->
+    <script src="{{ asset('central/back/assets/js/pages/dashboard-sale.js') }}"></script>
 
-<!-- datatable Js -->
-<script src="central/back/assets/js/plugins/jquery.dataTables.min.js"></script>
-<script src="central/back/assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-<script src="central/back/assets/js/pages/data-source-custom.js"></script>
+    <!-- datatable Js -->
+    <script src="{{ asset('central/back/assets/js/plugins/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('central/back/assets/js/plugins/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('central/back/assets/js/pages/data-source-custom.js') }}"></script>
 
-<!-- select2 Js -->
-<script src="central/back/assets/js/plugins/select2.full.min.js"></script>
-<!-- form-select-custom Js -->
-<script src="central/back/assets/js/pages/form-select-custom.js"></script>
+    <!-- select2 Js -->
+    <script src="{{ asset('central/back/assets/js/plugins/select2.full.min.js') }}"></script>
+    <!-- form-select-custom Js -->
+    <script src="{{ asset('central/back/assets/js/pages/form-select-custom.js') }}"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
         // display a modal (small modal)
