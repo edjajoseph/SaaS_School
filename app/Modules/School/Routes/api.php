@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Modules\Hotel\Controllers\Api\RoomApiController;
 use App\Modules\School\Http\Controllers\Api\BiometricAttendanceController;
 use App\Modules\School\Http\Controllers\Api\Academique\LevelsController;
 
