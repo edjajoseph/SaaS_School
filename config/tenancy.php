@@ -16,7 +16,7 @@ return [
      */
     'central_domains' => [
         parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST) ?? 'saas-hotel.test',
-        'localhost',
+        'localhost','responsible-emotion-production.up.railway.app',
     ],
 
     /**
