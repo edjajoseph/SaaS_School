@@ -108,7 +108,7 @@ use App\Modules\School\Http\Controllers\Web\Document\TeacherDocumentController;
 // Auth Routes
 // --------------------------------------------------------------------------
 // Formulaire de connexion (GET)
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('tenant.login');
 
 Route::post('/login', [LoginController::class, 'login'])->name('tenant.login.submit');
 
