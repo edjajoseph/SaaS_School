@@ -34,9 +34,14 @@ Route::middleware(['web'])->group(function () {
 
     Auth::routes();
 
-    Route::get('/', function () {
-        return view('accueil');
-    })->name('landing');
+    // Page d'accueil centrale : une route distincte par domaine central.
+    $centralDomains = config('tenancy.central_domains', []);
+
+    foreach ($centralDomains as $index => $domain) {
+        Route::domain($domain)->get('/', function () {
+            return view('accueil');
+        })->name($index === 0 ? 'landing' : "landing.central.{$index}");
+    }
 
     Route::prefix('webhooks/payments')->group(function () {
         Route::post('/wave', [MobilePaymentWebhookController::class, 'handleWave']);

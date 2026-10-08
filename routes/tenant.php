@@ -8,9 +8,9 @@ use App\Modules\School\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
-    InitializeTenancyByDomain::class, // 1. Basculer sur la BDD tenant EN PREMIER
     PreventAccessFromCentralDomains::class,
-    'web',                            // 2. Initialiser la session et réhydrater l'utilisateur APRES
+    InitializeTenancyByDomain::class,
+    'web',
 ])->group(function () {
 
     // 1. Page d'accueil / Landing page du Tenant
