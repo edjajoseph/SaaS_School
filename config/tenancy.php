@@ -15,7 +15,7 @@ return [
      * The list of domains hosting your central app.
      */
     'central_domains' => [
-        parse_url(env('APP_URL'), PHP_URL_HOST) ?? 'saas-hotel.test',
+        parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST) ?? 'saas-hotel.test',
         'localhost',
     ],
 
