@@ -69,7 +69,7 @@ return [
         ],
 
         'suffix_storage_path' => true,
-        'asset_helper_tenancy' => false,
+        'asset_helper_tenancy' => true,
     ],
 
     /**
