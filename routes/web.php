@@ -32,7 +32,8 @@ Route::middleware(['web'])->group(function () {
     Route::post('/activate-account/{user}', [AccountActivationController::class, 'activate'])
         ->name('account.activate.submit');
 
-    Auth::routes();
+        $centralHost = parse_url(config('app.url'), PHP_URL_HOST); 
+        Route::domain($centralHost)->group(function () { Auth::routes(); });
 
     // Page d'accueil centrale : une route distincte par domaine central.
     $centralDomains = config('tenancy.central_domains', []);
