@@ -22,7 +22,7 @@
           <a href="{{ route('register') }}" class="nav-link">
             <i class="now-ui-icons tech_mobile"></i> {{ __("ELEVE") }}
           </a>
-        </li>--> 
+        </li>-->
         <li class="nav-item @if (($activePage ?? '') == 'login') active @endif">
           <!-- Lien ouvrant la popup (modale) via data-toggle -->
           <a href="#" class="nav-link" data-toggle="modal" data-target="#loginAdminModal">
@@ -39,7 +39,7 @@
 <div class="modal fade" id="loginAdminModal" tabindex="-1" role="dialog" aria-labelledby="loginAdminModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      
+
     <div class="modal-header text-center position-relative w-100 pr-5">
       <h4 class="title modal-title w-100 mt-2 mb-0" id="loginAdminModalLabel">
         {{ __('Connexion Administration') }}
@@ -49,10 +49,11 @@
       </button>
     </div>
 
-      <form method="POST" action="{{ url('/login') }}">
+
+    <form method="POST" action="{{ route('tenant.login.submit', ['tenant' => tenant()->getTenantKey()]) }}">
         @csrf
         <div class="modal-body px-4">
-          
+
           <!-- Champ Email -->
           <div class="input-group no-border form-control-lg @error('email') has-danger @enderror">
             <div class="input-group-prepend">

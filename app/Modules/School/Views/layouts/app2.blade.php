@@ -163,12 +163,16 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('tenant.logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
+                                    <a href="{{ route('tenant.logout', ['tenant' => tenant()->getTenantKey()]) }}"
+   onclick="event.preventDefault();
+       document.getElementById('logout-form').submit();">
                                         <i class="ti-layout-sidebar-left"></i> 
-                                        <form id="logout-form" action="{{ route('tenant.logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
+                                        <form id="logout-form"
+      action="{{ route('tenant.logout', ['tenant' => tenant()->getTenantKey()]) }}"
+      method="POST"
+      style="display: none;">
+    @csrf
+</form>
                                             {{ __('Déconnexion') }}
                                     </a>
                                     </li>

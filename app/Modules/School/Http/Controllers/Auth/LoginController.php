@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -15,18 +16,31 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        Auth::forgetGuards();
-
-        if (Auth::guard('web')->attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::guard('web')->attempt(
+            $credentials,
+            $request->boolean('remember')
+        )) {
             $request->session()->regenerate();
 
-            return redirect()->route('school.dashboard');
+            $request->session()->put(
+                'authenticated_tenant_id',
+                tenant()->getTenantKey()
+            );
+
+            return redirect()->route('school.dashboard', [
+                'tenant' => tenant()->getTenantKey(),
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
-        ])->with('open_login_modal', true)->onlyInput('email');
+        return back()
+            ->withErrors([
+                'email' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
+            ])
+            ->with('open_login_modal', true)
+            ->onlyInput('email');
     }
+
+
 
     public function showLoginForm()
     {
@@ -38,14 +52,20 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function logout(Request $request)
-    {
-        Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+     public function logout(Request $request)
+     {
+         $tenantId = tenant()->getTenantKey();
 
-        // Redirige vers la page de login du tenant actuel
-        return redirect()->route('tenant.login.submit');
-    }
+         Auth::guard('web')->logout();
+
+         $request->session()->invalidate();
+         $request->session()->regenerateToken();
+
+         return redirect()->route('tenant.login', [
+             'tenant' => $tenantId,
+         ]);
+     }
+
+
 }

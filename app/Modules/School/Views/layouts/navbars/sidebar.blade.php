@@ -13,7 +13,7 @@
   <div class="sidebar-wrapper" id="sidebar-wrapper">
     <ul class="nav">      
       <li class="@if ($activePage == 'home') active @endif">
-        <a href="{{ route('home') }}">
+        <a href="{{ route('tenant.home', ['tenant' => tenant()->getTenantKey()]) }}">
           <i class="now-ui-icons design_app"></i>
           <p>{{ __('Tableau de bord') }}</p>
         </a>

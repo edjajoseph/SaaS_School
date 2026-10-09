@@ -20,7 +20,7 @@ class SchoolServiceProvider extends ServiceProvider
         
         // Conserver uniquement les vues et routes
         $this->loadViewsFrom(app_path('Modules/School/Views'), 'School');
-        $this->loadRoutesFrom(app_path('Modules/School/Routes/web.php'));
+        //$this->loadRoutesFrom(app_path('Modules/School/Routes/web.php'));
 
         // Enregistrement de l'observer pour la gestion automatique du statut des étudiants
         Registration::observe(RegistrationObserver::class);

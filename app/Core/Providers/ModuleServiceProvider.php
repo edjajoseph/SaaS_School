@@ -67,8 +67,20 @@ class ModuleServiceProvider extends ServiceProvider
         }
 
         // 3. Chargement des Routes Web (Unifié avec le middleware tenant)
-        if (File::exists($modulePath . '/Routes/web.php')) {
-            Route::middleware(['web', 'tenant']) // Inclut l'isolation tenant
+        // 3. Chargement des routes Web
+        // School, Hotel et Restaurant sont déjà chargés
+        // sous /tenant/{tenant} dans routes/tenant.php.
+        $modulesLoadedByTenantRoutes = [
+            'School',
+            'Hotel',
+            'Restaurant',
+        ];
+
+        if (
+            File::exists($modulePath . '/Routes/web.php')
+            && !in_array($moduleName, $modulesLoadedByTenantRoutes, true)
+        ) {
+            Route::middleware(['web', 'tenant'])
                 ->group($modulePath . '/Routes/web.php');
         }
 
