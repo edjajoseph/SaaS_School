@@ -22,8 +22,12 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         // 1. Super Administrateur / Administrateur Système
-        if ($user->hasRole('super-admin|admin-ecole')) {
+        
+        if (
+            $user->hasRole('super-admin') || $user->hasRole('admin-ecole')) 
+        {
             $data = $this->dashboardService->getAdminMetrics();
+
             return view('School::dashboard.admin', $data);
         }
 
